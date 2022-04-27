@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hibernate Search With Spring Boot</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--    <link href="/templates/index.css" rel="stylesheet">-->
+    <style>
+        body {
+            background-color: #2ecc71;
+            font-family: source-sans-pro, sans-serif;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-weight: 100;
+            font-size: 2.8em;
+            color: #ffffff;
+        }
+
+
+        .formStyle {
+            background-color: #2ecc71;
+            padding: 20px;
+            width: 400px;
+            margin-bottom: 20px;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #ecf0f1;
+            border-top-style: none;
+            border-right-style: none;
+            border-left-style: none;
+            font-size: 1em;
+            font-weight: 100;
+            color: #ffffff;
+        }
+
+        .formButton {
+            float: right;
+            background-color:#ffffff;
+            display:inline-block;
+            color:#2ecc71;
+            font-size:28px;
+            font-weight: 500;
+            padding:6px 24px;
+            margin-top: 15px;
+            margin-right: 60px;
+            text-decoration:none;
+        }
+
+        .formButton:hover {
+            background-color: #27ae60;
+            color:#ffffff;
+        }
+
+        .formButton:active {
+            position:relative;
+            top:3px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        /* To format the placeholder text color */
+        ::-webkit-input-placeholder {
+            color: #ecf0f1;
+        }
+
+        :-moz-placeholder { /* Firefox 18- */
+            color: #ecf0f1;
+        }
+
+        ::-moz-placeholder {  /* Firefox 19+ */
+            color: #ecf0f1;
+        }
+
+        :-ms-input-placeholder {
+            color: #ecf0f1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <h1>Search by word</h1>
+        <form action="#" th:action="@{/building/}" th:object="${search}">
+            <input class="formStyle" name="search" id="search"
+                   placeholder="Keywords" /></form>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-6">
+
+<!--        <form action="#" th:action="@{/building/}" th:object="${search}">-->
+<!--            <input class="formStyle" name="search" id="search"-->
+<!--                   placeholder="Keywords" />-->
+            <div th:if="${not #lists.isEmpty(search)}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>address</th>
+                        <th>note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="search : ${search}">
+                        <td th:text="${search.id}">Text ...</td>
+                        <td th:text="${search.name}">Text ...</td>
+                        <td th:text="${search.address}">Text ...</td>
+                        <td th:text="${search.note}">Text ...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--        </form>-->
+    </div>
+    <div class="col-6">
+        <div th:if="${not #lists.isEmpty(searchFuzzy)}">
+            <table>
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>address</th>
+                    <th>note</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="search : ${searchFuzzy}">
+                    <td th:text="${search.id}">Text ...</td>
+                    <td th:text="${search.name}">Text ...</td>
+                    <td th:text="${search.address}">Text ...</td>
+                    <td th:text="${search.note}">Text ...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>
